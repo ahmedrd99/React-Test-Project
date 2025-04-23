@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 export function RegisterForm(){
-    const [usernamen , setUsername]=useState("");
+    const [username , setUsername]=useState("");
     const [password , setPassword]=useState("");
     const [displayName , setDisplayName] = useState("");
     return <form>
@@ -19,18 +19,26 @@ export function RegisterForm(){
         </div>
          <br />
         <div>
-            <label htmlFor="password" >Password: </label>
+            <label htmlFor="password" >Password : </label>
             <br />
             <br />
-        <input id="password" type="text" />
+        <input id="password" 
+        value={password}
+        onChange={(e)=> { setPassword (e.target.value);
+
+        }} />
         
         </div>
          <br />
         <div>
-            <label htmlFor="displayName"> Display name: </label> 
+            <label htmlFor="displayName"> Display name : </label> 
             <br />
             <br />
-        <input id="displayName" type="text" />
+        <input id="displayName"  
+        value={displayName}
+        onChange={(e)=> { setDisplayName (e.target.value);
+
+        }} />
         
         </div>
     </form>
