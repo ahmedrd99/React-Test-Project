@@ -1,16 +1,16 @@
-export function UserDetails( props) 
-{ console.log(props);
+export function UserDetails( user) 
+{ console.log(user);
 
     return (
     <div>
         <b>ID:</b> 
-        <span>{props.user.id}</span>
+        <span>{user.user.id}</span>
         <br />
         <b>Username:</b> 
-        <span>{props.user.username}</span>
+        <span>{user.user.username}</span>
         <br />
         <b>Email:</b> 
-        <span>{props.user.Email}</span>
+        <span>{user.user.Email}</span>
     </div>
     );
 }

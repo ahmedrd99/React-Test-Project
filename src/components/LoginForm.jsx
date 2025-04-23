@@ -4,10 +4,20 @@ export function LoginForm() {
     // 1. Déclarez le state avec useState
   const [username, setUsername] = useState('');
     return ( 
+       
     <form onSubmit= {(e) => {
         e.preventDefault(); // Empêche la page de se recharger
         const formData = new FormData(e.target);//(e.target) ici cible le form lui-méme 
-        console.log(formData.get( )); 
+        const username = formData.get("username")
+        const password = formData.get("password")
+        
+         fetch("http://localhost:5173/api/login", {
+            body: {
+                username,
+                password,
+            }, method: "POST" , 
+         });
+
      }}
      > 
         <label htmlFor="username"
@@ -45,7 +55,7 @@ style={{padding:"10px", borderRadius:"6px", boxShadow:"initial", width:"300px"}}
 <button  onClick={(e) =>{console.log( "buttoncliquer")} }
 style={{display:"block", padding:"10px",width:"100px",   fontWeight: "bold" , fontSize:"20px", cursor:"pointer"}}>
     Login </button>
-    
+
     </form>
 );
 }

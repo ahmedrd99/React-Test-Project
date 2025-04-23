@@ -4,6 +4,7 @@
 import { UserProfile } from "./components/UserProfile"; 
 import { UserDetails } from "./components/UserDetails";
 import { LoginForm } from "./components/LoginForm";
+import { RegisterForm } from "./components/RegisterForm";
 /*
 
 export default function App(){ 
@@ -93,10 +94,14 @@ export default function app () {
     }
     */
 
-    export default function app() { 
+    export default function App() { 
+      window.addEventListener('resize', (e)=>{
+        console.log(window.innerHeight, window.innerWidth)
+      })
+     
       return ( 
         <div>
-            <LoginForm /> 
+            <RegisterForm  /> 
         </div>
       )
     }
