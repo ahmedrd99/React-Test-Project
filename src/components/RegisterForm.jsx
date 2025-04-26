@@ -44,8 +44,8 @@ export function RegisterForm(){
         id="password" 
         value={formFields.password}
         //onChange={(e)=> { setPassword (e.target.value);}}
-        onChange={(e)=>{ setFormFields((currentState) => 
-            ({ ...currentState , // React te donne le VRAI état actuel
+        onChange={(e)=>{ setFormFields((formFields) => 
+            ({ ...formFields , // React te donne le VRAI état actuel
                 password: e.target.value,
             }))}}
           />

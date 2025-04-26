@@ -1,6 +1,6 @@
 
 
-
+import { useState } from "react";
 import { UserProfile } from "./components/UserProfile"; 
 import { UserDetails } from "./components/UserDetails";
 import { LoginForm } from "./components/LoginForm";
@@ -94,14 +94,37 @@ export default function app () {
     }
     */
 
-    export default function App() { 
-      window.addEventListener('resize', (e)=>{
-        console.log(window.innerHeight, window.innerWidth)
-      })
+    // export default function App() { 
+    //   window.addEventListener('resize', (e)=>{
+    //     console.log(window.innerHeight, window.innerWidth)
+    //   })
      
-      return ( 
-        <div>
-            <RegisterForm  /> 
-        </div>
-      )
+    //   return ( 
+    //     <div>
+    //         <RegisterForm  /> 
+    //     </div>
+    //   )
+    // }
+
+    export default function App() {
+      const [ users, setUsers]= useState([
+        {
+          id:1,
+          username:"anson",
+          email:"anson@gmail.com",
+        },
+        {
+          id:2, 
+          username:"nike",
+          email:"nike@gmail.com",
+        }
+
+      ]);
+
+      return <div>
+      {users.map((user)=> (
+          <UserDetails key={user.id} user={user}/>
+      ))
+      }
+      </div>
     }
