@@ -2,15 +2,14 @@ import   PropTypes from "prop-types";
 import { useState } from "react";
 
 
-export function UserDetails({user}) {
+export function UserDetails({user,setUsers}) {
     const  [isEditing,setIsEditing]=useState(false);
 console.log(user);
 console.log(isEditing);
 
-const[userInfo,setUserInfo]=useState({
-    username: user.username,
-    email: user.email
-});
+const [username,setUsername]=useState(user.username);
+const [email,setEmail]  =useState(user.email);
+
 
     return (
    <div>
@@ -25,20 +24,22 @@ const[userInfo,setUserInfo]=useState({
             name="username"
             id="username"
             type="text"
-            value={userInfo.username}
-            onChange={(e)=> setUserInfo({...userInfo,username:e.target.value})} 
+            value={username}
+            onChange={(e)=>{  setUsername( e.target.value);}} 
             />
-        ) : <span>{userInfo.username}</span>}
+        ) :( <span>{username}</span>)}
         <br />
-        <b>Email:</b> 
+        <b>Email: </b> 
         {isEditing? (
             
             <input 
-            type="text"
-            value={userInfo.email}
-            onChange={(e)=> setUserInfo({...userInfo,email: e.target.value})} 
+            name="email"
+            id="email"
+            type="email"
+            value={email}
+            onChange={(e)=> { setEmail ( e.target.value) }} 
             />
-        ) : <span>{userInfo.email}</span>}
+        ) : <span>{email}</span>}
   
 
     </div>
@@ -47,10 +48,23 @@ const[userInfo,setUserInfo]=useState({
     onClick={()=> { 
         setIsEditing((currentState)=> !currentState);
     }} > 
-        {isEditing?"Save": "Edit"} 
-        
+          EDIT
         </button>
         <button onClick={() => alert("User deleted")}>DELETE</button>
+        
+        {isEditing && (
+        <button onClick={()=> {
+          setUsers(
+            (currentUserState)=> {
+              return currentUserState.map(
+                (currentUser)=>currentUser.id === user.id? 
+                {...currentUser,username,email}:currentUser
+              )
+        }
+          );
+          setIsEditing(false); 
+        }}  >Save</button>
+      )}
     </div>
    </div>
    

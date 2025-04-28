@@ -123,7 +123,7 @@ export default function app () {
 
       return <div>
       {users.map((user)=> (
-          <UserDetails key={user.id} user={user}/>
+          <UserDetails key={user.id} user={user} setUsers={setUsers}/>
       ))
       }
       </div>
