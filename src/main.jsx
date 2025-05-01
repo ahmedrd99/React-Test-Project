@@ -7,8 +7,8 @@ import "./globals.css";
     
   
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
- <div> <App/>   </div>
-  </StrictMode>,
-)
+ReactDOM.createRoot(document.getElementById("root")).render(
+  < React.StrictMode>
+<div>  <App/></div>
+  </React.StrictMode >
+);

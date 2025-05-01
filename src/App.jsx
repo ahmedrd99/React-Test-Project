@@ -1,6 +1,6 @@
 
 
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import { UserProfile } from "./components/UserProfile"; 
 import { UserDetails } from "./components/UserDetails";
 import { LoginForm } from "./components/LoginForm";
@@ -107,29 +107,36 @@ export default function app () {
     // }
 
     export default function App() {
-      const [username,setUsername]=useState ("");
-      const [email,setEmail]=useState ("");
-      const [counter,setCounter]=useState (3);
+      // const [username,setUsername]=useState ("");
+      // const [email,setEmail]=useState ("");
+      const [counter,setCounter]=useState (0);
      
-      const [ users, setUsers]= useState([
-        {
-          id:1,
-          username:"anson",
-          email:"anson@gmail.com",
-        },
-        {
-          id:2, 
-          username:"nike",
-          email:"nike@gmail.com",
-        }
+     
+      //   {
+      //     id:1,
+      //     username:"anson",
+      //     email:"anson@gmail.com",
+      //   },
+      //   {
+      //     id:2, 
+      //     username:"nike",
+      //     email:"nike@gmail.com",
+      //   }
 
-      ]);
+      // ]);
     
-      
+      useEffect(() => { 
+        console.log('Rendring...')
+      document.title = "React Tutorial"  ;
+
+      }, []);
       return (
       <div>
+        <div> You cliked the button  {counter} times</div>
+<button  onClick={()=> setCounter((count) => count+1)}>click Me</button>
 
-        <form onSubmit={(e)=>{ e.preventDefault()
+
+        {/* <form onSubmit={(e)=>{ e.preventDefault()
           const newUser = {
             id: counter,
             username, 
@@ -164,12 +171,39 @@ export default function app () {
         <br />
        <button >Add User</button>
 
-        </form>
-        <br /> 
+        </form> */}
+           
       
-      {users.map((user)=> (
+      {/* {users.map((user)=> (
          <UserDetails key={user.id} user={user} setUsers={setUsers}/>
       ))
-      }
+      } */}
       </div>
     )}
+
+
+
+    //simple exercice With useEffect: 
+//     import { useState, useEffect } from "react";
+
+// export default function App() {
+//   const [username, setUsername] = useState("");
+
+//   useEffect(() => {
+//     console.log("Tu as tapé :", username);
+//   }, [username]);
+
+//   return (
+//     <div>
+//       <h1>Bienvenue !</h1>
+//       <input
+//         type="text"
+//         placeholder="Tape ton nom"
+//         value={username}
+//         onChange={(e) => setUsername(e.target.value)}
+//         style={{ padding: "10px", fontSize: "16px", borderRadius: "6px" }}
+//       />
+//       <p>Tu as écrit : <strong>{username}</strong></p>
+//     </div>
+//   );
+// }
