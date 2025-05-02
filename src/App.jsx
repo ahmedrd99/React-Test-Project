@@ -110,7 +110,7 @@ export default function app () {
       // const [username,setUsername]=useState ("");
       // const [email,setEmail]=useState ("");
       const [counter,setCounter]=useState (0);
-     
+      const [pizza, setPizza] = useState(" ");
      
       //   {
       //     id:1,
@@ -127,13 +127,15 @@ export default function app () {
     
       useEffect(() => { 
         console.log('Rendring...')
-      document.title = "React Tutorial"  ;
+      document.title = "React Tutorial" + pizza + counter ;
 
-      }, []);
+      }, [counter, pizza]);
       return (
       <div>
-        <div> You cliked the button  {counter} times</div>
-<button  onClick={()=> setCounter((count) => count+1)}>click Me</button>
+        <div> You have Ordered   <b style={{color:"red"}}>{counter}</b> times</div>
+        <div> You chose  the Pizza  : <strong style={{color:"red"}}>{pizza}</strong> </div>
+<button  onClick={()=> setCounter((count, ) => count+3 )}>click Me</button>
+<button  onClick={()=> setPizza(p=> p=="Margherita"? "4 fromages":"Margherita" )}  >choose Your Pizza  </button>
 
 
         {/* <form onSubmit={(e)=>{ e.preventDefault()
@@ -207,3 +209,84 @@ export default function app () {
 //     </div>
 //   );
 // }
+
+
+// example avec UseEffect Pizza 
+// import { useState, useEffect } from 'react';
+
+// export default function App() {
+//   const [counter, setCounter] = useState(0);
+//   const [pizza, setPizza] = useState("Margherita");
+//   const [userInput, setUserInput] = useState(""); // Nouvel état pour l'input
+
+//   useEffect(() => {
+//     document.title = `React Tutorial | Pizza: ${pizza} | Compteur: ${counter}`;
+//   }, [counter, pizza]);
+
+//   const handleCounterChange = (value) => {
+//     setCounter(prev => prev + value);
+//   };
+
+//   const handlePizzaChange = (newPizza) => {
+//     setPizza(newPizza);
+//   };
+
+//   return (
+//     <div style={{ padding: '20px', fontFamily: 'Arial' }}>
+//       <h2>Menu Personnalisé</h2>
+      
+//       <div style={{ margin: '15px 0' }}>
+//         <p>Compteur actuel: <strong>{counter}</strong></p>
+//         <button onClick={() => handleCounterChange(1)} style={buttonStyle}>+1</button>
+//         <button onClick={() => handleCounterChange(3)} style={buttonStyle}>+3</button>
+//         <button onClick={() => handleCounterChange(-1)} style={buttonStyle}>-1</button>
+//         <input
+//           type="number"
+//           value={userInput}
+//           onChange={(e) => setUserInput(e.target.value)}
+//           placeholder="Entrez un nombre"
+//           style={{ margin: '0 10px', padding: '5px' }}
+//         />
+//         <button 
+//           onClick={() => handleCounterChange(Number(userInput))} 
+//           style={buttonStyle}
+//         >
+//           Appliquer
+//         </button>
+//       </div>
+
+//       <div style={{ margin: '15px 0' }}>
+//         <p>Pizza actuelle: <strong>{pizza}</strong></p>
+//         <select 
+//           value={pizza} 
+//           onChange={(e) => handlePizzaChange(e.target.value)}
+//           style={{ padding: '5px' }}
+//         >
+//           <option value="Margherita">Margherita</option>
+//           <option value="4 Fromages">4 Fromages</option>
+//           <option value="Pepperoni">Pepperoni</option>
+//           <option value="Custom">Personnalisée</option>
+//         </select>
+//       </div>
+
+//       {pizza === "Custom" && (
+//         <input
+//           type="text"
+//           placeholder="Nommez votre pizza"
+//           onChange={(e) => setPizza(e.target.value)}
+//           style={{ padding: '5px', marginTop: '10px' }}
+//         />
+//       )}
+//     </div>
+//   );
+// }
+
+// const buttonStyle = {
+//   padding: '5px 10px',
+//   margin: '0 5px',
+//   backgroundColor: '#4CAF50',
+//   color: 'white',
+//   border: 'none',
+//   borderRadius: '4px',
+//   cursor: 'pointer'
+// };
