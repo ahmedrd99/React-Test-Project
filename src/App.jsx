@@ -109,8 +109,7 @@ export default function app () {
     export default function App() {
       // const [username,setUsername]=useState ("");
       // const [email,setEmail]=useState ("");
-      const [counter,setCounter]=useState (0);
-      const [pizza, setPizza] = useState(" ");
+       
      
       //   {
       //     id:1,
@@ -129,14 +128,8 @@ export default function app () {
         console.log('Rendring...')
       document.title = "React Tutorial" + pizza + counter ;
 
-      }, [counter, pizza]);
-      return (
-      <div>
-        <div> You have Ordered   <b style={{color:"red"}}>{counter}</b> times</div>
-        <div> You chose  the Pizza  : <strong style={{color:"red"}}>{pizza}</strong> </div>
-<button  onClick={()=> setCounter((count, ) => count+3 )}>click Me</button>
-<button  onClick={()=> setPizza(p=> p=="Margherita"? "4 fromages":"Margherita" )}  >choose Your Pizza  </button>
-
+      }, [counter]);
+ 
 
         {/* <form onSubmit={(e)=>{ e.preventDefault()
           const newUser = {
@@ -180,8 +173,8 @@ export default function app () {
          <UserDetails key={user.id} user={user} setUsers={setUsers}/>
       ))
       } */}
-      </div>
-    )}
+      }
+    
 
 
 
