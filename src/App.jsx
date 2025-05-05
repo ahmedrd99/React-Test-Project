@@ -109,28 +109,57 @@ export default function app () {
     export default function App() {
       // const [username,setUsername]=useState ("");
       // const [email,setEmail]=useState ("");
-       
-     
-      //   {
-      //     id:1,
-      //     username:"anson",
-      //     email:"anson@gmail.com",
-      //   },
-      //   {
-      //     id:2, 
-      //     username:"nike",
-      //     email:"nike@gmail.com",
-      //   }
-
-      // ]);
-    
-      useEffect(() => { 
+       const [counter,setCounter]= useState(0);
+       const [sync,setSync]= useState(false);;
+      
+      
+       useEffect(() => { 
+        console.log('sync a changé :', sync);
         console.log('Rendring...')
-      document.title = "React Tutorial" + pizza + counter ;
+      document.title = "React Tutorial" + counter ;
 
-      }, [counter]);
+      }, [sync]);
+
+      useEffect(()=>{ 
+        const controller = new AbortController();
  
+         async function fetchUser() {
+          try{
+          const response = await fetch (
+            "https://jsonplaceholder.typicode.com/users",
+           { signal: controller.signal}
 
+          );
+          
+          const json =  await  response.json()
+              console.log(json);
+              console.log(controller.signal);
+              
+          } catch (err) { 
+            console.log(err);
+            "ras gar3a shi haja ghalta "
+          }
+         } 
+             fetchUser(); 
+             return () => { 
+              controller.abort();
+                
+             }
+
+      },[]);
+      
+       
+      return (
+ <div>
+  <div>You clicked the button {counter} times </div>
+<button  onClick={()=>setCounter( (count)=> count  +1)}> clique </button>
+     <button onClick={()=>setSync((current)=>!current)}>Sync</button>
+    </div>
+
+      
+
+    )
+/*
         {/* <form onSubmit={(e)=>{ e.preventDefault()
           const newUser = {
             id: counter,
@@ -173,9 +202,8 @@ export default function app () {
          <UserDetails key={user.id} user={user} setUsers={setUsers}/>
       ))
       } */}
-      }
+      // } 
     
-
 
 
     //simple exercice With useEffect: 
@@ -283,3 +311,4 @@ export default function app () {
 //   borderRadius: '4px',
 //   cursor: 'pointer'
 // };
+
