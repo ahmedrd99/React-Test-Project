@@ -5,6 +5,80 @@ import { UserProfile } from "./components/UserProfile";
 import { UserDetails } from "./components/UserDetails";
 import { LoginForm } from "./components/LoginForm";
 import { RegisterForm } from "./components/RegisterForm";
+
+
+
+export default function App( ) { 
+ 
+ const [blogPostData,setBlogPostData]= useState({
+  title :  "", 
+  body:""
+
+ })
+ console.log(blogPostData);
+ return( 
+  <div>
+    <form onSubmit={(e)=>{ e.preventDefault();
+      if(blogPostData.title && blogPostData.body ) { 
+        fetch(  "https://jsonplaceholder.typicode.com/posts", {
+          method :'POST', //send data 
+          body:{
+            userId:1,
+            title: blogPostData.title,
+            body: blogPostData.body,
+
+           },
+           headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+           },
+        }) 
+          .then((response)=> response.json())
+        .then((data)=> {
+        console.log('Success!');
+        console.log(data)
+
+      }).catch ((err )=> console.log(err));
+    }
+    }} >
+
+     <div>
+     <label htmlFor="title">Title:</label>
+      <input 
+      type="text" 
+      id="title" 
+      value={blogPostData.title}
+      onChange={(e)=>{setBlogPostData((currentBlogPostData)=> ({
+        ...currentBlogPostData ,
+        title: e.target.value
+      }));
+      }}/>
+
+     </div>
+     <div>
+     <label htmlFor="body">Body:</label>
+      <input 
+      type="text" 
+      id="body" 
+      value={blogPostData.body}
+      onChange={(e)=>{setBlogPostData((currentBlogPostData)=> ({
+        ...currentBlogPostData ,
+        body: e.target.value
+      }));
+      }}/>
+     </div>
+     
+     <button >Creat Post</button>
+   
+    </form>
+
+  </div>
+      
+ )
+}
+
+
+
+
 /*
 
 export default function App(){ 
@@ -106,6 +180,12 @@ export default function app () {
     //   )
     // }
 
+
+
+    /* Fetch 
+
+
+
     export default function App() {
       // const [username,setUsername]=useState ("");
       // const [email,setEmail]=useState ("");
@@ -155,10 +235,13 @@ export default function app () {
 <button  onClick={()=>setCounter( (count)=> count  +1)}> clique </button>
      <button onClick={()=>setSync((current)=>!current)}>Sync</button>
     </div>
-
-      
-
+ 
     )
+    */
+
+
+
+
 /*
         {/* <form onSubmit={(e)=>{ e.preventDefault()
           const newUser = {
@@ -195,13 +278,13 @@ export default function app () {
         <br />
        <button >Add User</button>
 
-        </form> */}
+        </form> } */
            
       
-      {/* {users.map((user)=> (
+      /* {users.map((user)=> (
          <UserDetails key={user.id} user={user} setUsers={setUsers}/>
       ))
-      } */}
+      } */
       // } 
     
 
