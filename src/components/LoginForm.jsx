@@ -1,9 +1,31 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
+import { useDocumentClick } from '../utils/hooks/useDocumentClick';
 
 export function LoginForm() {
     // 1. Déclarez le state avec useState
   const [username, setUsername] = useState('');
-    return ( 
+    
+        useEffect(()=> {
+            const resizeEventHandler = (e) => { 
+            console.log ("Window/ViewPort Resized!")
+                };
+                
+            
+            window.addEventListener('resize',   resizeEventHandler);
+           
+            return () => { 
+                console.log("Unmounting LoginForm");
+                console.log("Removing Resize Event Listener ")
+            window.removeEventListener("resize", resizeEventHandler);
+     
+            };
+        
+            },[]);
+
+    
+     useDocumentClick();
+            return ( 
+        
        
     <form onSubmit= {(e) => {
         e.preventDefault(); // Empêche la page de se recharger

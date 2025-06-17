@@ -1,80 +1,137 @@
-
-
 import { useState, useEffect} from "react";
 import { UserProfile } from "./components/UserProfile"; 
 import { UserDetails } from "./components/UserDetails";
 import { LoginForm } from "./components/LoginForm";
 import { RegisterForm } from "./components/RegisterForm";
+import { PostContainer } from "./components/PostContainer";
+import { UserContext } from "./utils/Contexts/UserContext";
+import { PostContentButtons } from "./components/PostContentButtons";
+import { useFetchUser } from "./utils/hooks/UseFetchUser";
 
 
+export default function App( ) {
 
-export default function App( ) { 
- 
- const [blogPostData,setBlogPostData]= useState({
-  title :  "", 
-  body:""
+  //api function 
+ const user =  useFetchUser(2)
+ console.log(user);
 
- })
- console.log(blogPostData);
- return( 
-  <div>
-    <form onSubmit={(e)=>{ e.preventDefault();
-      if(blogPostData.title && blogPostData.body ) { 
-        fetch(  "https://jsonplaceholder.typicode.com/posts", {
-          method :'POST', //send data 
-          body:{
-            userId:1,
-            title: blogPostData.title,
-            body: blogPostData.body,
-
-           },
-           headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-           },
-        }) 
-          .then((response)=> response.json())
-        .then((data)=> {
-        console.log('Success!');
-        console.log(data)
-
-      }).catch ((err )=> console.log(err));
-    }
-    }} >
-
-     <div>
-     <label htmlFor="title">Title:</label>
-      <input 
-      type="text" 
-      id="title" 
-      value={blogPostData.title}
-      onChange={(e)=>{setBlogPostData((currentBlogPostData)=> ({
-        ...currentBlogPostData ,
-        title: e.target.value
-      }));
-      }}/>
-
-     </div>
-     <div>
-     <label htmlFor="body">Body:</label>
-      <input 
-      type="text" 
-      id="body" 
-      value={blogPostData.body}
-      onChange={(e)=>{setBlogPostData((currentBlogPostData)=> ({
-        ...currentBlogPostData ,
-        body: e.target.value
-      }));
-      }}/>
-     </div>
+  const [userData,setUserData]=useState({
+      id:'1', 
+    username:'ahmed',
+    email:'ahmedrochdi824@gmail.com',
      
-     <button >Creat Post</button>
-   
-    </form>
+    phone : '0772156464',
+    displayName:'ahmedRD'
 
-  </div>
-      
- )
+  })
+ return  (
+  
+<>
+  <UserContext.Provider //permet de "fournir" les données à tous les enfants
+  value={{...userData, setUserData}
+    
+    //contient les données que tu veux partager.
+    // id:'1', 
+    // username:'ahmed',
+    // email:'ahmedrochdi824@gmail.com',
+     
+    // phone : '0772156464',
+    // displayName:'ahmedRD'
+
+  }>
+   
+    <div>
+    <PostContainer/>
+    </div>
+    <PostContentButtons/>
+
+  </UserContext.Provider>
+  
+</>
+  );
 }
+
+//    const [ toggle, setToggle] = useState(false);
+//    return (
+//      <div>
+//     <button onClick={()=> setToggle((currentState)=>!currentState)}>Toggle</button>
+//       <p>État : {toggle ? "ALLUMÉ 🔥" : "ÉTEINT ❄️"}</p> {/* Affiche l'état */}
+//       {toggle && <LoginForm/>}
+//    </div>
+//    );
+// }                
+
+ 
+// Fetch POST
+  
+//  const [blogPostData,setBlogPostData]= useState({
+//   title :  "", 
+//   body:""
+
+//  })
+//  console.log(blogPostData);
+//  return( 
+//   <div>
+//     <form onSubmit={(e)=>{ e.preventDefault();
+//       if(blogPostData.title && blogPostData.body ) { 
+//         fetch(  "https://jsonplaceholder.typicode.com/posts", {
+
+//           method :'POST', //send data 
+//           body:{
+//             userId:1,
+//             title: blogPostData.title,
+//             body: blogPostData.body,
+
+//            },
+
+//            headers: {
+//             'Content-type': 'application/json; charset=UTF-8',
+//            },
+//         }) 
+
+//         .then((response)=> response.json())
+//         .then((data)=> {
+//         console.log('Success!');
+//         console.log(data)
+
+//       }).catch ((err )=> console.log(err));
+//     }
+//     }} >
+
+//      <div>
+//      <label htmlFor="title">Title:</label>
+//       <input 
+//       type="text" 
+//       id="title" 
+//       value={blogPostData.title}
+//       onChange={(e)=>{setBlogPostData((currentBlogPostData)=> ({
+//         ...currentBlogPostData ,
+//         title: e.target.value
+//       }));
+//       }}/>
+
+//      </div>
+//      <div>
+//      <label htmlFor="body">Body:</label>
+//       <input 
+//       type="text" 
+//       id="body" 
+//       value={blogPostData.body}
+//       onChange={(e)=>{setBlogPostData((currentBlogPostData)=> ({
+//         ...currentBlogPostData ,
+//         body: e.target.value
+//       }));
+//       }}/>
+//      </div>
+     
+//      <button >Creat Post</button>
+   
+//     </form>
+
+//   </div>
+      
+//  )
+// }
 
 
 
