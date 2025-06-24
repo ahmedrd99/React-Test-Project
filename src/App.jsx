@@ -7,46 +7,83 @@ import { PostContainer } from "./components/PostContainer";
 import { UserContext } from "./utils/Contexts/UserContext";
 import { PostContentButtons } from "./components/PostContentButtons";
 import { useFetchUser } from "./utils/hooks/UseFetchUser";
+import { Outlet,Link, useNavigate } from "react-router-dom";
+import { BlogPostPage } from "./pages/BlogPostPage";
 
 
-export default function App( ) {
+ 
+
+ 
+export default function App () {
 
   //api function 
- const user =  useFetchUser(2)
- console.log(user);
+ const {user, loading, error} =  useFetchUser(2);
 
-  const [userData,setUserData]=useState({
-      id:'1', 
-    username:'ahmed',
-    email:'ahmedrochdi824@gmail.com',
-     
-    phone : '0772156464',
-    displayName:'ahmedRD'
+ console.log(user,loading, error);
 
-  })
+  const [userData,setUserData]=useState(
+  
+);
+const navigate = useNavigate();
+
+
+useEffect(()=> {
+  if(!loading && !error && user) {
+    
+    setUserData(user);
+   
+  }
+
+
+ },[loading,error,user, ])
+  console.log(loading );
+  
  return  (
   
 <>
-  <UserContext.Provider //permet de "fournir" les données à tous les enfants
-  value={{...userData, setUserData}
+<nav>
+  <ul>
+    <li>
+      <a href="/">Home</a>
+    </li>
+    <li>
+      <a href="/users">users</a>
+    </li>
+    <li>
+      <a href="/blog-posts">Blogs</a>
+    </li>
     
-    //contient les données que tu veux partager.
-    // id:'1', 
-    // username:'ahmed',
-    // email:'ahmedrochdi824@gmail.com',
-     
-    // phone : '0772156464',
-    // displayName:'ahmedRD'
+    <li>
+      <a href="/footer">footer</a>
+    </li>
 
-  }>
+  </ul>
+</nav>
+<div>
+  <label htmlFor="data">Enter data</label>
+  <br />
+  <input
+      type="text"
+      id="data"
+      onChange={(e) => { 
+    if(e.target.value.length>10) {navigate("/blog-posts") }
+  }} />
+</div>
+<br />
+ 
+ 
+  <UserContext.Provider //permet de "fournir" les données à tous les enfants
+  value={{...user, setUserData}  }>
    
     <div>
-    <PostContainer/>
+     {loading ? 'Loading ....': <PostContainer/>}
     </div>
-    <PostContentButtons/>
+ 
 
   </UserContext.Provider>
-  
+  <br />
+<br />
+  <Outlet/>
 </>
   );
 }

@@ -8,14 +8,12 @@ export function PostContentButtons ({data}) {
     return ( 
     
         <div>
-            <div>
-                <span>PostContentButtons</span>
-            </div>
+             
             {id}
             <br />
             <button onClick={()=> {
                 setUserData((currentState)=> ({...currentState,
-                     displayName: 'updated Display Name'}))
+                     name: 'updated Display Name'}))
             }}> Click Me</button>
          
         </div>

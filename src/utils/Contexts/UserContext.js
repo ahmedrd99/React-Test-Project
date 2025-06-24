@@ -5,7 +5,7 @@ export const UserContext = createContext(
     username:"",
     email:"",
     phone:"",
-    displayName:"", 
+    name:"", 
     setUserData:()=> {},
   }
 );
