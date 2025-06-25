@@ -66,7 +66,17 @@ useEffect(()=> {
       type="text"
       id="data"
       onChange={(e) => { 
-    if(e.target.value.length>10) {navigate("/blog-posts") }
+    if(e.target.value.length>10) {navigate("/blog-posts",{
+      state:{
+        posts:[
+          {
+            id:1,
+            title:"hello world",
+            content:"welcome to my first  ",
+          },
+        ],
+      }
+    }) }
   }} />
 </div>
 <br />
