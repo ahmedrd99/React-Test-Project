@@ -5,10 +5,10 @@ import { useLocation } from 'react-router-dom';
 export function BlogPostPage() {
   const [posts,setPosts]=useState([])
 const {state}= useLocation();
-console.log(state )
+console.log(window.history.state )
 
 useEffect(()=>{
-  if(state&& state.posts){
+  if(state && state.posts){
      setPosts(state.posts)
   }
 }, [state])
@@ -24,6 +24,7 @@ return(
         <h1><span><b>Content : </b></span> {post.content}</h1>
       
       </section>
+
         </div>
 
 

@@ -71,8 +71,13 @@ useEffect(()=> {
         posts:[
           {
             id:1,
-            title:"hello world",
+            title:"Hello world",
             content:"welcome to my first  ",
+          },
+          {
+            id:2,
+            title:"My picture",
+            content:"Welcome to our univers  ",
           },
         ],
       }
