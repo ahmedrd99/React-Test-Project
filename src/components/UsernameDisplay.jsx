@@ -1,12 +1,17 @@
-import { useContext } from "react";
+import { useContext, useState,useEffect } from "react";
 
-useContext
+ 
 export   function UsernameDisplay({ username}) {
+    const [timerPassed,setTimerPassed]=useState(false);
+    useEffect(()=>{
+      const timer =  setTimeout(()=>{setTimerPassed(true)},1500);
+     
+   return ()=> clearTimeout(timer)},[])
     
     return (
         <div>
             
-           <span>{username} </span>
+           <span>{timerPassed && username} </span>
         </div>
     );
 }

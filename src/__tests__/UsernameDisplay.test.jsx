@@ -8,7 +8,7 @@ it('should rendre username ',async ()=> {
     render(< UsernameDisplay username="ahmeddev"  />);
   // expect( result.container) .toMatchSnapshot()
 
-expect (   await screen.findByText("ahmeddev",{},{ timeout:5000})).toBeInTheDocument(); // Recherche + Vérification
+expect (   await screen.findByText("ahmeddev",{},{ timeout:10000})).toBeInTheDocument(); // Recherche + Vérification
 // element.array.forEach((element) =>  expect(element).not.toBeInTheDocument());
   //  let error;
 // try {

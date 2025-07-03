@@ -17,14 +17,15 @@ import { BlogPostPage } from "./pages/BlogPostPage";
 export default function App () {
 
   //api function 
- const {user, loading, error} =  useFetchUser(2);
+  const {user, loading, error} =  useFetchUser(2); 
+  console.log(user,loading, error); const [userData,setUserData]=useState();
+  const navigate = useNavigate(); 
+  const [users,setUsers]=useState([{
+  id:1,
+  username:"Ahmeddev",
+  email:"ahmedrochdi824@gmail.com"
 
- console.log(user,loading, error);
-
-  const [userData,setUserData]=useState(
-  
-);
-const navigate = useNavigate();
+  }])
 
 
 useEffect(()=> {
@@ -41,7 +42,13 @@ useEffect(()=> {
  return  (
   
 <>
-<nav>
+    {users.map (user=>
+    <UserDetails
+      key={user.id} 
+      user={user}  // Données de l'utilisateur
+      setUsers={setUsers}/>  // Fonction pour modifier la liste
+    )}
+{/* <nav>
   <ul>
     <li>
       <a href="/">Home</a>
@@ -84,7 +91,7 @@ useEffect(()=> {
     }) }
   }} />
 </div>
-<br />
+<br /> */}
  
  
   <UserContext.Provider //permet de "fournir" les données à tous les enfants
